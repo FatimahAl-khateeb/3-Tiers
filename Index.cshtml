@@ -1,0 +1,49 @@
+﻿@model GlobaDev.Models.StudentListVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add") @* Create is the name of an action method , while Create New is a string  *@
+</p>
+
+<p>
+    @Html.ActionLink("my Layout Page", "TestLayout")
+</p>
+
+<p>
+    @Html.ActionLink("Paging/Filtering", "Paging")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Students.First().StudentName) @*I can write rather all this line to give same result ( StudentName ) ,later i'll know should i write it in this way *@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Students.First().Age)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Students)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName) @*modelItem is a var. (list of Student) *@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.StudentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StudentId })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.Label("Student Count : ") @ViewBag.StudentCount
