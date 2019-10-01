@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DAL;
+
+
+namespace BLL
+{
+    public class ClsBussinessLogic 
+    {
+        private ClsDataAccess _DAL = new ClsDataAccess();
+
+        public Student Add(Student std)
+        {
+            var Result = _DAL.Add(std);
+            return Result;
+        }
+
+        public Student Edit(Student std)
+        {
+            var Result = _DAL.Edit(std);
+            return Result;
+        }
+
+        public Student Delete(int Id)
+        {
+            var Result = _DAL.Delete(Id);
+            return Result;
+        }
+
+        public Student GetById(int Id)
+        {
+            var Result = _DAL.GetById(Id);
+            return Result;
+        }
+
+        public List<Student> Get()
+        {
+            var Result = _DAL.Get();
+            return Result;
+        }
+
+    }
+}
