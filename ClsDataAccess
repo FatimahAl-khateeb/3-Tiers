@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace DAL
+{
+    public class ClsDataAccess :Student
+    {
+
+        private static List<Student> studentList = new List<Student>{
+                            new Student() { StudentId = 1, StudentName = "John", Age = 18 } , // not necesary to write id in fixed way (1,2,3,...) they can be unfixed (2,5,7,..)  
+                            new Student() { StudentId = 2, StudentName = "Steve",  Age = 21 } ,
+                            new Student() { StudentId = 3, StudentName = "Bill",  Age = 25 } ,
+                            new Student() { StudentId = 4, StudentName = "Ram" , Age = 20 } ,
+                            new Student() { StudentId = 5, StudentName = "Ron" , Age = 31 } ,
+                            new Student() { StudentId = 6, StudentName = "Chris" , Age = 17 } ,
+                            new Student() { StudentId = 7, StudentName = "Rob" , Age = 19 }
+         };
+
+
+        
+
+        public Student Add(Student std)
+        {
+            var maxId = studentList.Max(x => x.StudentId);
+            std.StudentId = maxId + 1;
+            studentList.Add(std);
+            return std;
+
+        }
+        public Student Edit(Student std)
+        {
+            bool ageAlreadyExists = studentList.Exists(x => x.Age == std.Age);
+            var oldStd = studentList.Where(s => s.StudentId == std.StudentId).Single();
+            oldStd.StudentName = std.StudentName;
+            oldStd.Age = std.Age;
+            return std;
+        }
+
+        public Student Delete(int Id)
+        {
+            var std = studentList.Where(s => s.StudentId == Id).Single();
+            studentList.Remove(std);
+            return std;
+        }
+
+        public Student GetById(int Id)
+        {
+            var std = studentList.Where(s => s.StudentId == Id).Single();
+            return std;
+        }
+
+        public List<Student> Get()
+        {
+            var Result = studentList;
+            return Result;
+        }
+
+    }
+}
